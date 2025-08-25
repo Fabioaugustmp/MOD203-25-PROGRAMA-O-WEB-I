@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Flexbox Lesson</title>
+    <!-- Chosen Palette: Warm Neutrals -->
+    <!-- Application Structure Plan: The application is structured as a linear, single-page tutorial broken into four thematic sections mirroring the lesson plan: 'Introduction', 'Container Properties', 'Item Properties', and 'Live Example'. This sequential flow is ideal for a learning experience, guiding the user from foundational concepts to practical application. Navigation is handled by a fixed header with links that smoothly scroll to the corresponding sections. Interactivity is introduced through clickable cards that reveal information and interactive sandboxes where users can toggle CSS properties and see the visual changes in real-time on a sample flex container. This hands-on approach was chosen to make abstract CSS properties tangible and easier to understand than static text. -->
+    <!-- Visualization & Content Choices: 
+        - Report Info: Core Flexbox concepts (e.g., display: flex, flex-direction, justify-content). Goal: Inform & Demonstrate. Viz/Method: Interactive HTML/CSS/JS "sandboxes". A container with items is displayed, and users click buttons to apply different flex properties. The visual change is immediate. Justification: This provides direct, hands-on feedback, which is far more effective for learning CSS than static images or text. Library: Vanilla JS and Tailwind CSS.
+        - Report Info: The analogy of a bookshelf and books. Goal: Inform & Simplify. Viz/Method: A styled HTML section with unicode icons (📚) and clear headings. Justification: A simple, clean visual metaphor aids understanding without needing complex graphics.
+        - Report Info: The final project (Navbar). Goal: Apply knowledge. Viz/Method: A split-screen layout. On one side, the final rendered navbar is shown. On the other, the HTML and CSS code are displayed in styled `<pre>` blocks. This allows users to see the code and the result side-by-side. Justification: This directly connects the abstract code to the concrete visual output, solidifying the lesson's main goal.
+        - CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #fdfcfb;
+            color: #333;
+            scroll-behavior: smooth;
+        }
+        .font-mono {
+            font-family: 'Roboto Mono', monospace;
+        }
+        .header {
+            background-color: rgba(253, 252, 251, 0.8);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+        .hero-gradient {
+            background: radial-gradient(circle, rgba(239,229,220,0.5) 0%, rgba(253,252,251,1) 60%);
+        }
+        .interactive-box {
+            display: flex;
+            background-color: #f3f4f6;
+            border-radius: 0.75rem;
+            min-height: 200px;
+            border: 1px solid #e5e7eb;
+            transition: all 0.3s ease-in-out;
+        }
+        .interactive-box .item {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #a5b4fc;
+            color: white;
+            font-weight: 600;
+            border-radius: 0.5rem;
+            margin: 0.5rem;
+            width: 80px;
+            height: 80px;
+            transition: all 0.3s ease-in-out;
+        }
+        .control-btn {
+            background-color: #fff;
+            border: 1px solid #d1d5db;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.2s ease;
+            color: #374151;
+        }
+        .control-btn:hover {
+            background-color: #f9fafb;
+            border-color: #9ca3af;
+        }
+        .control-btn.active {
+            background-color: #6366f1;
+            color: white;
+            border-color: #6366f1;
+        }
+        .code-block {
+            background-color: #282c34;
+            color: #abb2bf;
+            padding: 1.5rem;
+            border-radius: 0.75rem;
+            overflow-x: auto;
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+        .code-block .token.property { color: #d19a66; }
+        .code-block .token.selector { color: #e06c75; }
+        .code-block .token.value { color: #98c379; }
+        .code-block .token.comment { color: #5c6370; }
+    </style>
+</head>
+<body class="antialiased">
+
+    <header id="header" class="header sticky top-0 z-50 shadow-sm">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="font-extrabold text-2xl text-indigo-600">Flexbox</div>
+            <div class="hidden md:flex items-center space-x-8">
+                <a href="#intro" class="text-gray-600 hover:text-indigo-600 transition">Intro</a>
+                <a href="#container" class="text-gray-600 hover:text-indigo-600 transition">Container</a>
+                <a href="#items" class="text-gray-600 hover:text-indigo-600 transition">Items</a>
+                <a href="#example" class="text-gray-600 hover:text-indigo-600 transition">Example</a>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section id="intro" class="hero-gradient pt-24 pb-16">
+            <div class="container mx-auto px-6 text-center">
+                <h1 class="text-5xl md:text-6xl font-extrabold text-gray-800 leading-tight">A Simpler Way to Build Layouts</h1>
+                <p class="mt-4 text-lg text-gray-600 max-w-2xl mx-auto">This is an interactive guide to CSS Flexbox. Forget floats and positioning hacks. In the next hour, you'll learn how to create powerful, responsive layouts with ease.</p>
+                <div class="mt-12 p-8 bg-white rounded-2xl shadow-lg max-w-3xl mx-auto border border-gray-200">
+                     <h2 class="text-2xl font-bold text-gray-800">The Core Idea: The Bookshelf 📚</h2>
+                     <p class="mt-2 text-gray-600">Think of Flexbox like a magic bookshelf. The shelf itself is the <code class="font-mono bg-indigo-100 text-indigo-700 rounded px-1 py-0.5 text-sm">container</code>, and the books are the <code class="font-mono bg-indigo-100 text-indigo-700 rounded px-1 py-0.5 text-sm">items</code>. Flexbox gives you simple controls to arrange the books on the shelf—aligning them, spacing them out, and even changing their order.</p>
+                     <p class="mt-4">To turn on these powers, you just need one line of CSS on your container:</p>
+                     <div class="mt-4 code-block font-mono text-left">
+                        <span class="token.selector">.bookshelf</span> {<br>
+                        &nbsp;&nbsp;<span class="token.property">display</span>: <span class="token.value">flex</span>; <span class="token.comment">/* ✨ That's it! */</span><br>
+                        }
+                     </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="container" class="py-20 bg-white">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h2 class="text-4xl font-extrabold text-gray-800">The Container's Superpowers</h2>
+                    <p class="mt-2 text-lg text-gray-600 max-w-2xl mx-auto">These properties are set on the container (the bookshelf) to control all the items inside. Try them out!</p>
+                </div>
+
+                <div class="grid md:grid-cols-2 gap-12 items-start">
+                    <div>
+                        <h3 class="text-2xl font-bold mb-2">1. `justify-content`</h3>
+                        <p class="text-gray-600 mb-4">Aligns items along the main axis (horizontally). It distributes extra space.</p>
+                        <div id="justify-content-controls" class="flex flex-wrap gap-2 mb-4">
+                            <button class="control-btn active" data-value="flex-start">flex-start</button>
+                            <button class="control-btn" data-value="flex-end">flex-end</button>
+                            <button class="control-btn" data-value="center">center</button>
+                            <button class="control-btn" data-value="space-between">space-between</button>
+                            <button class="control-btn" data-value="space-around">space-around</button>
+                        </div>
+                        <div id="justify-content-box" class="interactive-box p-2 items-center">
+                            <div class="item">1</div>
+                            <div class="item">2</div>
+                            <div class="item">3</div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h3 class="text-2xl font-bold mb-2">2. `align-items`</h3>
+                        <p class="text-gray-600 mb-4">Aligns items along the cross axis (vertically).</p>
+                        <div id="align-items-controls" class="flex flex-wrap gap-2 mb-4">
+                            <button class="control-btn" data-value="stretch">stretch</button>
+                            <button class="control-btn active" data-value="flex-start">flex-start</button>
+                            <button class="control-btn" data-value="flex-end">flex-end</button>
+                            <button class="control-btn" data-value="center">center</button>
+                        </div>
+                        <div id="align-items-box" class="interactive-box p-2">
+                            <div class="item">1</div>
+                            <div class="item h-28">2</div>
+                            <div class="item">3</div>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <h3 class="text-2xl font-bold mb-2">3. `flex-direction`</h3>
+                        <p class="text-gray-600 mb-4">Controls the direction items are placed in the container.</p>
+                        <div id="flex-direction-controls" class="flex flex-wrap gap-2 mb-4">
+                            <button class="control-btn active" data-value="row">row</button>
+                            <button class="control-btn" data-value="column">column</button>
+                        </div>
+                        <div id="flex-direction-box" class="interactive-box p-2 items-start">
+                            <div class="item">1</div>
+                            <div class="item">2</div>
+                            <div class="item">3</div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h3 class="text-2xl font-bold mb-2">4. `flex-wrap`</h3>
+                        <p class="text-gray-600 mb-4">Decides if items should wrap to a new line when they run out of space.</p>
+                        <div id="flex-wrap-controls" class="flex flex-wrap gap-2 mb-4">
+                            <button class="control-btn active" data-value="nowrap">nowrap</button>
+                            <button class="control-btn" data-value="wrap">wrap</button>
+                        </div>
+                        <div id="flex-wrap-box" class="interactive-box p-2 items-start overflow-hidden">
+                            <div class="item">1</div><div class="item">2</div><div class="item">3</div><div class="item">4</div><div class="item">5</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="items" class="py-20 bg-gray-50">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h2 class="text-4xl font-extrabold text-gray-800">The Item's Special Power</h2>
+                    <p class="mt-2 text-lg text-gray-600 max-w-2xl mx-auto">Sometimes, you want one item to behave differently. That's where item-specific properties come in.</p>
+                </div>
+                <div class="max-w-3xl mx-auto bg-white p-8 rounded-2xl shadow-lg border border-gray-200">
+                    <h3 class="text-2xl font-bold mb-2">`align-self`</h3>
+                    <p class="text-gray-600 mb-4">This property is applied to a single flex item and overrides the container's `align-items` for just that one item. Click on an item below to change its `align-self` property.</p>
+                    <div id="align-self-box" class="interactive-box p-2 items-center justify-center">
+                        <div class="item cursor-pointer" data-align="auto">1</div>
+                        <div class="item cursor-pointer bg-indigo-500" data-align="auto">2 (Click Me)</div>
+                        <div class="item cursor-pointer" data-align="auto">3</div>
+                    </div>
+                    <p class="mt-4 text-center font-mono text-sm text-gray-500">Container has <code class="bg-gray-200 rounded px-1">align-items: center</code>. Item 2 has <code id="align-self-status" class="bg-indigo-100 text-indigo-700 rounded px-1">align-self: auto</code>.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="example" class="py-20 bg-white">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h2 class="text-4xl font-extrabold text-gray-800">Let's Build! A Real-World Example</h2>
+                    <p class="mt-2 text-lg text-gray-600 max-w-2xl mx-auto">Let's use what we've learned to build a common component: a responsive website navigation bar. The beauty of Flexbox is that this complex-looking layout is achieved with just a few lines of CSS.</p>
+                </div>
+
+                <div class="bg-gray-50 rounded-2xl shadow-lg border border-gray-200 overflow-hidden">
+                    <div class="p-4 bg-gray-100 border-b border-gray-200">
+                        <h3 class="font-bold text-gray-700">Live Preview</h3>
+                    </div>
+                    <div class="p-6">
+                         <nav class="flex justify-between items-center bg-white p-4 rounded-xl shadow">
+                            <div class="text-xl font-bold text-indigo-600">Logo</div>
+                            <div class="hidden md:flex items-center space-x-6">
+                                <a href="#example" class="text-gray-600 hover:text-indigo-500">Home</a>
+                                <a href="#example" class="text-gray-600 hover:text-indigo-500">About</a>
+                                <a href="#example" class="text-gray-600 hover:text-indigo-500">Contact</a>
+                            </div>
+                            <div class="md:hidden">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" /></svg>
+                            </div>
+                        </nav>
+                    </div>
+                    <div class="grid md:grid-cols-2 gap-px bg-gray-200">
+                        <div class="bg-gray-50 p-4">
+                            <h4 class="font-bold text-gray-700 mb-2">HTML Structure</h4>
+                            <div class="code-block font-mono">
+<pre><code>&lt;nav class="navbar"&gt;
+  &lt;!-- Item 1 --&gt;
+  &lt;div class="logo"&gt;Logo&lt;/div&gt;
+
+  &lt;!-- Item 2 --&gt;
+  &lt;ul class="nav-links"&gt;
+    &lt;li&gt;...&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/nav&gt;</code></pre>
+                            </div>
+                        </div>
+                        <div class="bg-gray-50 p-4">
+                            <h4 class="font-bold text-gray-700 mb-2">Flexbox CSS</h4>
+                            <div class="code-block font-mono">
+<pre><code><span class="token.selector">.navbar</span> {
+  <span class="token.property">display</span>: <span class="token.value">flex</span>;
+  <span class="token.property">justify-content</span>: <span class="token.value">space-between</span>;
+  <span class="token.property">align-items</span>: <span class="token.value">center</span>;
+}</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-gray-800 text-white py-8">
+        <div class="container mx-auto px-6 text-center">
+            <p>You've completed the interactive Flexbox lesson!</p>
+            <p class="text-sm text-gray-400 mt-2">Now you have the power to build amazing layouts.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            function setupInteractiveControls(containerId, boxId, property) {
+                const controls = document.getElementById(containerId);
+                const box = document.getElementById(boxId);
+                if (!controls || !box) return;
+
+                controls.addEventListener('click', function(e) {
+                    if (e.target.tagName === 'BUTTON') {
+                        const value = e.target.dataset.value;
+                        box.style[property] = value;
+                        
+                        controls.querySelector('.active').classList.remove('active');
+                        e.target.classList.add('active');
+                    }
+                });
+            }
+
+            setupInteractiveControls('justify-content-controls', 'justify-content-box', 'justifyContent');
+            setupInteractiveControls('align-items-controls', 'align-items-box', 'alignItems');
+            setupInteractiveControls('flex-direction-controls', 'flex-direction-box', 'flexDirection');
+            setupInteractiveControls('flex-wrap-controls', 'flex-wrap-box', 'flexWrap');
+
+            const alignSelfBox = document.getElementById('align-self-box');
+            if (alignSelfBox) {
+                const alignSelfStatus = document.getElementById('align-self-status');
+                const alignOptions = ['auto', 'flex-start', 'flex-end', 'center', 'stretch'];
+                let currentIndex = 0;
+
+                alignSelfBox.addEventListener('click', function(e) {
+                    if (e.target.classList.contains('item')) {
+                        const targetItem = alignSelfBox.querySelector('.bg-indigo-500');
+                        if(targetItem) {
+                            currentIndex = (currentIndex + 1) % alignOptions.length;
+                            const nextValue = alignOptions[currentIndex];
+                            targetItem.style.alignSelf = nextValue;
+                            alignSelfStatus.textContent = `align-self: ${nextValue}`;
+                        }
+                    }
+                });
+            }
+            
+            const header = document.getElementById('header');
+            window.addEventListener('scroll', () => {
+                if(window.scrollY > 50) {
+                    header.classList.add('shadow-md');
+                } else {
+                    header.classList.remove('shadow-md');
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>

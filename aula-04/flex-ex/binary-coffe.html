@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Café Binário - Nosso Menu</title>
+    <link rel="stylesheet" href="b-style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <header class="navbar">
+        <div class="container">
+            <div class="logo">☕ Café Binário</div>
+            <nav>
+                <ul>
+                    <li><a href="#" class="active">Menu</a></li>
+                    <li><a href="#">Sobre</a></li>
+                    <li><a href="#">Contato</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="menu-section">
+            <h1>Nossas Especialidades</h1>
+            <div class="product-grid">
+
+                <div class="product-card">
+                    <img src="https://images.unsplash.com/photo-1579992305312-304b437c355c?ixlib=rb-4.0.3&q=85&fm=jpg&crop=entropy&cs=srgb&w=600" alt="Café Espresso">
+                    <div class="card-content">
+                        <h3>Espresso</h3>
+                        <p>Intenso e encorpado, a mais pura extração do grão de café.</p>
+                        <div class="card-footer">
+                            <span class="price">R$ 6,00</span>
+                            <button class="order-btn" data-product="Espresso">Pedir agora</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <img src="https://images.unsplash.com/photo-1541167760496-1628856ab772?ixlib=rb-4.0.3&q=85&fm=jpg&crop=entropy&cs=srgb&w=600" alt="Café Latte">
+                    <div class="card-content">
+                        <h3>Latte</h3>
+                        <p>Uma dose de espresso suavizada com leite vaporizado e uma fina camada de espuma.</p>
+                        <div class="card-footer">
+                            <span class="price">R$ 9,50</span>
+                            <button class="order-btn" data-product="Latte">Pedir agora</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <img src="https://images.unsplash.com/photo-1517256064227-7f7f9ea56d56?ixlib=rb-4.0.3&q=85&fm=jpg&crop=entropy&cs=srgb&w=600" alt="Café Cappuccino">
+                    <div class="card-content">
+                        <h3>Cappuccino</h3>
+                        <p>O equilíbrio perfeito entre espresso, leite vaporizado e uma cremosa espuma de leite.</p>
+                        <div class="card-footer">
+                            <span class="price">R$ 10,00</span>
+                            <button class="order-btn" data-product="Cappuccino">Pedir agora</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <img src="https://images.unsplash.com/photo-1621267860477-4293c4e4334a?ixlib=rb-4.0.3&q=85&fm=jpg&crop=entropy&cs=srgb&w=600" alt="Café Mocha">
+                     <div class="card-content">
+                        <h3>Mocha</h3>
+                        <p>Uma deliciosa combinação de espresso, leite e calda de chocolate, finalizado com chantilly.</p>
+                        <div class="card-footer">
+                            <span class="price">R$ 12,50</span>
+                            <button class="order-btn" data-product="Mocha">Pedir agora</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Café Binário. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <div id="order-modal" class="modal-overlay">
+        <div class="modal-content">
+            <button class="close-modal">&times;</button>
+            <h2>Personalize seu <span id="product-name">Café</span></h2>
+            <form id="order-form">
+                <div class="form-group">
+                    <label>Tamanho:</label>
+                    <div class="radio-group">
+                        <input type="radio" id="size-s" name="size" value="Pequeno" checked>
+                        <label for="size-s">Pequeno (200ml)</label>
+                        <input type="radio" id="size-m" name="size" value="Médio">
+                        <label for="size-m">Médio (300ml)</label>
+                        <input type="radio" id="size-l" name="size" value="Grande">
+                        <label for="size-l">Grande (400ml)</label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="milk-type">Tipo de Leite:</label>
+                    <select id="milk-type" name="milk">
+                        <option value="Integral">Integral</option>
+                        <option value="Desnatado">Desnatado</option>
+                        <option value="Aveia">Aveia (+ R$ 2,00)</option>
+                        <option value="Amêndoas">Amêndoas (+ R$ 2,00)</option>
+                    </select>
+                </div>
+                <button type="submit" class="confirm-btn">Confirmar Pedido</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

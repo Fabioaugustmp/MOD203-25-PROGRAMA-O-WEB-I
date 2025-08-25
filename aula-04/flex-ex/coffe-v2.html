@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Café Gourmet - Vitrine</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        background-color: #f3f1ee;
+    }
+
+    /* Cabeçalho */
+    header {
+        position: sticky;
+        top: 0;
+        background-color: #6b4f4f;
+        color: white;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1rem 2rem;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        z-index: 10;
+    }
+
+    header h1 {
+        font-size: 1.5rem;
+        margin: 0;
+    }
+
+    nav ul {
+        list-style: none;
+        display: flex;
+        gap: 1rem;
+        margin: 0;
+        padding: 0;
+    }
+
+    nav ul li a {
+        color: white;
+        text-decoration: none;
+        font-weight: bold;
+    }
+
+    /* Container de produtos */
+    .vitrine {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 20px;
+        padding: 20px;
+    }
+
+    /* Card de produto */
+    .card {
+        background-color: white;
+        width: 250px;
+        height: 350px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        padding: 15px;
+        transition: transform 0.3s;
+    }
+
+    .card:hover {
+        transform: scale(1.05);
+    }
+
+    .card img {
+        width: 100%;
+        height: 150px;
+        object-fit: contain;
+    }
+
+    .card h3 {
+        margin: 10px 0 5px;
+        color: #6b4f4f;
+        font-size: 1.2rem;
+    }
+
+    .card p {
+        margin: 0;
+        font-size: 1rem;
+        color: #333;
+    }
+
+    .preco {
+        font-weight: bold;
+        font-size: 1.1rem;
+        color: #a0522d;
+    }
+
+    .btn-comprar {
+        background-color: #6b4f4f;
+        color: white;
+        border: none;
+        padding: 10px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 1rem;
+        transition: background 0.3s;
+    }
+
+    .btn-comprar:hover {
+        background-color: #4a2e2e;
+    }
+
+    /* Responsividade */
+    @media (max-width: 768px) {
+        .card {
+            width: 45%;
+        }
+    }
+
+    @media (max-width: 500px) {
+        header {
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+
+        nav ul {
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .card {
+            width: 90%;
+        }
+    }
+</style>
+</head>
+<body>
+
+<header>
+    <h1>☕ Café Gourmet</h1>
+    <nav>
+        <ul>
+            <li><a href="#">Início</a></li>
+            <li><a href="#">Cardápio</a></li>
+            <li><a href="contact.html">Contato</a></li>
+        </ul>
+    </nav>
+</header>
+
+<main>
+    <section class="vitrine">
+        <div class="card">
+            <img src="https://cdn-icons-png.flaticon.com/512/924/924514.png" alt="Café Expresso">
+            <div>
+                <h3>Expresso</h3>
+                <p class="preco">R$ 8,50</p>
+            </div>
+            <button class="btn-comprar">Comprar</button>
+        </div>
+
+        <div class="card">
+            <img src="https://cdn-icons-png.flaticon.com/512/590/590836.png" alt="Capuccino">
+            <div>
+                <h3>Capuccino</h3>
+                <p class="preco">R$ 12,00</p>
+            </div>
+            <button class="btn-comprar">Comprar</button>
+        </div>
+
+        <div class="card">
+            <img src="https://cdn-icons-png.flaticon.com/512/2170/2170154.png" alt="Latte">
+            <div>
+                <h3>Latte</h3>
+                <p class="preco">R$ 10,00</p>
+            </div>
+            <button class="btn-comprar">Comprar</button>
+        </div>
+
+        <div class="card">
+            <img src="https://cdn-icons-png.flaticon.com/512/3173/3173478.png" alt="Mocha">
+            <div>
+                <h3>Mocha</h3>
+                <p class="preco">R$ 11,50</p>
+            </div>
+            <button class="btn-comprar">Comprar</button>
+        </div>
+    </section>
+</main>
+
+</body>
+</html>
