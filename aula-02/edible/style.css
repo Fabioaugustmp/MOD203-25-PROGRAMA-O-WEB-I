@@ -1,0 +1,77 @@
+/* Estilo aplicado a tudo (*) para remover margens padrão */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box; /* Garante que padding e border não aumentem a largura total */
+}
+
+/* Estilo para o corpo inteiro da página */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #333; /* Fundo cinza escuro */
+    color: #ddd; /* Cor de texto padrão um pouco mais clara */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Ocupa 100% da altura da tela */
+}
+
+/* Estilizando o container principal pelo seu ID único */
+#ficha-personagem {
+    width: 400px;
+    background-color: #444;
+    border: 2px solid #888;
+    border-radius: 10px; /* Bordas arredondadas */
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.5); /* Sombra para dar profundidade */
+    overflow: hidden; /* Garante que nada "vaze" das bordas arredondadas */
+}
+
+/* Estilizando o cabeçalho da ficha */
+#cabecalho-ficha {
+    background-color: #0d6efd; /* Azul vibrante */
+    color: #fff; /* Texto branco */
+    padding: 20px; /* Espaçamento interno */
+    text-align: center;
+}
+
+#cabecalho-ficha h1 {
+    font-size: 24px;
+    margin-bottom: 5px; /* Pequena margem abaixo do h1 */
+}
+
+/* Estilo genérico para os títulos das seções */
+h2 {
+    color: #0d6efd;
+    border-bottom: 2px solid #555; /* Linha divisória abaixo do título */
+    padding-bottom: 5px;
+    margin-bottom: 15px;
+}
+
+/* Estilo para todas as seções, usando o seletor de classe */
+.secao-atributos,
+.secao-equipamentos {
+    padding: 20px;
+}
+
+/* Estilo para a lista de atributos */
+.secao-atributos ul {
+    list-style: none; /* Remove as bolinhas da lista */
+    padding-left: 0;
+}
+
+.secao-atributos li {
+    background-color: #555;
+    padding: 10px;
+    margin-bottom: 8px;
+    border-radius: 5px;
+}
+
+/* Estilizando o rodapé da ficha */
+.rodape {
+    background-color: #222;
+    color: #888;
+    padding: 10px;
+    text-align: center;
+    font-size: 12px;
+    font-style: italic;
+}
